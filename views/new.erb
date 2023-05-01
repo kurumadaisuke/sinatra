@@ -1,9 +1,8 @@
 <h2>新規作成</h2>
-<form method="post" action="/new">
-  <p>題名</p>
-  <input type="text" name="name">
+<form action="/new" method="post">
+  <p>タイトル</p>
+  <input type="text" name="title">
   <p>内容</p>
-  <input type="text" name="contents">
+  <input type="text" name="content">
+  <button type="submit">保存</button>
 </form>
-
-<button onclick="location.href='/'">保存</button>
