@@ -1,14 +1,14 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require "sinatra/json"
 
 set :environment, :production
 
+json_file = 'public/memos.js'
+
 get '/' do
-  @memo1 = []
-  memos = ["メモ1","メモ2","メモ3","メモ4","メモ5"]
-  memos.each do |memo|
-    @memo1 << memo
-  end
+  memos_json = JSON.parse(File.read(json_file))
+  @memos_title_data = memos_json.values.map { |title| title['title'] }
   erb :index
 end
 

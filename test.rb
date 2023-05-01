@@ -1,6 +1,8 @@
-  memos = ["メモ1","メモ2","メモ3","メモ4","メモ5"]
-  @memo1 = []
-  memos.each do |memo|
-    @memo1 << memo
-  end
-    puts @memo1
+# require "json"
+# json_file = 'public/memos.js'
+
+# memos_json = JSON.parse(File.read(json_file))
+
+# @memodata = memos_json.values.map { |title| title['title'] }
+
+# puts @memodata

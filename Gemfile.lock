@@ -7,6 +7,9 @@ GEM
     rack (2.2.7)
     rack-protection (3.0.6)
       rack
+    rake (13.0.6)
+    ruby-debug-ide (0.7.3)
+      rake (>= 0.8.1)
     ruby2_keywords (0.0.5)
     sinatra (3.0.6)
       mustermann (~> 3.0)
@@ -26,6 +29,7 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  ruby-debug-ide
   sinatra
   sinatra-contrib
   webrick

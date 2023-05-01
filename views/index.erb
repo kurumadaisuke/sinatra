@@ -1,8 +1,8 @@
 <h2>TOP画面</h2>
-<a href='/new'" class="bt-samp8">追加</a>
+<a href='/new'" class="bt-samp8">メモを追加する</a>
 
 <ul>
-<% @memo1.each do |memo| %>
-<li><a href="/show"><%= memo %></a></li>
-<% end %>
+  <% @memos_title_data.each do |title| %>
+    <li><a href="/show"><%= title %></a></li>
+  <% end %>
 </ul>
