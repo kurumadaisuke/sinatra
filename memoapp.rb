@@ -8,7 +8,7 @@ json_file = 'public/memos.js'
 
 get '/' do
   memos_json = JSON.parse(File.read(json_file))
-  @memos_title_data = memos_json.values.map { |title| title['title'] }
+  @titles = memos_json.values.map { |memo| memo['title'] }
   erb :index
 end
 
