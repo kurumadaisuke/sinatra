@@ -7,8 +7,7 @@ set :environment, :production
 json_file = 'public/memos.js'
 
 get '/' do
-  memos_json = JSON.parse(File.read(json_file))
-  @titles = memos_json.values.map { |memo| memo['title'] }
+  @memos = JSON.parse(File.read(json_file))
   erb :index
 end
 
@@ -16,7 +15,10 @@ get '/new' do
   erb :new
 end
 
-get '/show' do
+get '/show/:id' do
+  memos = JSON.parse(File.read(json_file))
+  @title = memos[params[:id]]['title']
+  @content = memos[params[:id]]['content']
   erb :show
 end
 

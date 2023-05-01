@@ -2,7 +2,7 @@
 <a href='/new'" class="bt-samp8">メモを追加する</a>
 
 <ul>
-  <% @titles.each do |title| %>
-    <li><a href="/show"><%= title %></a></li>
+  <% @memos.each do |id, value| %>
+    <li><a href="/show/<%= id %>"><%= value['title'] %></a></li>
   <% end %>
 </ul>
