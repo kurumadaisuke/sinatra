@@ -1,9 +1,9 @@
 <div class="show-wrapper">
   <div class="show-header">
-    <h2><%= @title %></h2>
+    <h2><%= CGI.escapeHTML(@title) %></h2>
   </div>
   <div class="show-content">
-    <p><%= @content %></p>
+    <p><%= CGI.escapeHTML(@content) %></p>
   </div>
   <div class="show-footer">
     <form action="/edit/<%= @id %>" method="get" class="new-form">

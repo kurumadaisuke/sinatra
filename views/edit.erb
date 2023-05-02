@@ -1,9 +1,9 @@
 <h2>編集画面</h2>
 <form action="/edit/<%= @id %>" method="post" class="new-form">
   <p>タイトル</p>
-  <input type="text" name="title" value="<%= @title %>" class="new-input">
+  <input type="text" name="title" value="<%= CGI.escapeHTML(@title) %>" class="new-input">
   <p>内容</p>
-  <textarea name="content" rows="10" class="new-input"><%= @content %></textarea>
+  <textarea name="content" rows="10" class="new-input"><%= CGI.escapeHTML(@content) %></textarea>
   <input type="hidden" name="_method" value="patch">
   <button type="submit" class="new-submit">編集を保存</button>
 </form>

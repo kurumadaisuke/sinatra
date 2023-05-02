@@ -1,8 +1,7 @@
 <h2>TOP画面</h2>
-<a href='/new'" class="new-submit">メモを追加する</a>
-
+  <a href='/new' class="new-submit">メモを追加する</a>
 <ul>
   <% @memos.each do |id, value| %>
-    <li><a href="/show/<%= id %>"><%= value['title'] %></a></li>
+  <li><a href="/show/<%= id %>"><%= CGI.escapeHTML(value['title']) %></a></li>
   <% end %>
 </ul>
