@@ -49,6 +49,24 @@ delete '/:id' do
   redirect '/'
 end
 
-get '/edit' do
+get '/edit/:id' do
+  memos = JSON.parse(File.read(json_file))
+  @title = memos[params[:id]]['title']
+  @content = memos[params[:id]]['content']
+  @id = params[:id]
   erb :edit
+end
+
+patch '/edit/:id' do
+  memos = JSON.parse(File.read(json_file))
+  edit_title = params[:title]
+  edit_content = params[:content]
+
+  memos[params[:id]] = {"title" => edit_title, "content" => edit_content}
+
+  File.open(json_file, "w") do |file|
+    JSON.dump(memos,file)
+  end
+
+  redirect "/show/#{params[:id]}"
 end
