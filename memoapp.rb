@@ -34,7 +34,19 @@ get '/show/:id' do
   memos = JSON.parse(File.read(json_file))
   @title = memos[params[:id]]['title']
   @content = memos[params[:id]]['content']
+  @id = params[:id]
   erb :show
+end
+
+delete '/:id' do
+  memos = JSON.parse(File.read(json_file))
+  memos.delete(params[:id])
+
+  File.open(json_file, "w") do |file|
+    JSON.dump(memos,file)
+  end
+
+  redirect '/'
 end
 
 get '/edit' do

@@ -1,13 +1,19 @@
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/test.css"/>
     <title>MEMOアプリ</title>
+    <link rel="stylesheet" href="/css/test.css"/>
   </head>
-
   <body>
-  <h1>メモアプリ</h1>
-    <%= yield %>
-  <div><a href="/">ページトップへ戻る</a></div>
+    <header>
+      <h1>メモアプリ</h1>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <a href="/">ページトップへ戻る</a>
+    </footer>
   </body>
 </html>

@@ -1,6 +1,19 @@
-<p>メモタイトル：    <%= @title %></p>
-<p>メモの内容：    <%= @content %></p>
+<div class="show-wrapper">
+  <div class="show-header">
+    <h2><%= @title %></h2>
+  </div>
+  <div class="show-content">
+    <p><%= @content %></p>
+  </div>
+  <div class="show-footer">
+    <form action="/edit/<%= @id %>" method="get" class="new-form">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="new-submit">変更</button>
+    </form>
 
-
-<a href='/edit'" class="bt-samp8">変更</a>
-<a href='/new'" class="bt-samp8">削除</a>
+    <form action="/<%= @id %>" method="post" class="new-form">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="new-submit">削除</button>
+    </form>
+  </div>
+</div>
