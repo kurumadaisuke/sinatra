@@ -7,7 +7,7 @@ require 'cgi'
 
 set :environment, :production
 
-json_file = 'public/memos.js'
+json_file = 'private/memos.json'
 
 get '/' do
   @memos = JSON.parse(File.read(json_file))
