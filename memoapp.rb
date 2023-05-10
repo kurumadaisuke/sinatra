@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # require 'debug'
-# binding.break
+
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/json'
@@ -45,6 +45,7 @@ end
 # 特定のメモのタイトル,内容を表示
 get '/memos/:id' do
   @memos = JSON.parse(File.read(json_file))[params[:id]]
+  # binding.break
   @id = params[:id]
   erb :show
 end
