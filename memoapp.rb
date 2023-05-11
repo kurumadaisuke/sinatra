@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# require 'debug'
 
 require 'sinatra'
 require 'sinatra/reloader'
@@ -10,23 +9,19 @@ set :environment, :production
 
 json_file = 'private/memos.json'
 
-# ルートからのアクセスをmemosにリダイレクト
 get '/' do
   redirect '/memos'
 end
 
-# メモの一覧を表示
 get '/memos' do
   @memos = JSON.parse(File.read(json_file))
   erb :index
 end
 
-# メモの新規作成画面を表示
 get '/memos/new' do
   erb :new
 end
 
-# /memos/newの内容を送る
 post '/memos' do
   memos = JSON.parse(File.read(json_file))
   title = params[:title]
@@ -42,15 +37,11 @@ post '/memos' do
   redirect '/memos'
 end
 
-# 特定のメモのタイトル,内容を表示
 get '/memos/:id' do
-  @memos = JSON.parse(File.read(json_file))[params[:id]]
-  # binding.break
-  @id = params[:id]
+  @memo = JSON.parse(File.read(json_file))[params[:id]]
   erb :show
 end
 
-# 特定のメモを削除
 delete '/memos/:id' do
   memos = JSON.parse(File.read(json_file))
   memos.delete(params[:id])
@@ -63,8 +54,7 @@ delete '/memos/:id' do
 end
 
 get '/memos/:id/edit' do
-  @memos = JSON.parse(File.read(json_file))[params[:id]]
-  @id = params[:id]
+  @memo = JSON.parse(File.read(json_file))[params[:id]]
   erb :edit
 end
 
