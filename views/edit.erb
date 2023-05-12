@@ -1,0 +1,9 @@
+<h2>編集画面</h2>
+<form action="/memos/<%= params[:id] %>" method="post" class="new-form">
+  <p>タイトル</p>
+  <input type="text" name="title" value="<%= CGI.escapeHTML(@memo['title']) %>" class="new-input">
+  <p>内容</p>
+  <textarea name="content" rows="10" class="new-input"><%= CGI.escapeHTML(@memo['content']) %></textarea>
+  <input type="hidden" name="_method" value="patch">
+  <button type="submit" class="new-submit">編集を保存</button>
+</form>

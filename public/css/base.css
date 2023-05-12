@@ -1,0 +1,118 @@
+/* 全体的な修正 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+header {
+  background-color: #2196F3;
+  color: #fff;
+  padding: 16px;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+footer {
+  background-color: #eee;
+  color: #333;
+  padding: 16px;
+}
+
+a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ボタンのスタイル修正 */
+.new-submit,
+.show-footer a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #2196F3;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.new-submit:hover,
+.show-footer a:hover {
+  opacity: 0.8;
+}
+
+/* 新規作成画面と詳細画面のスタイル修正 */
+.new-form,
+.show-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.new-input,
+.new-textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 2px solid #ccc;
+}
+
+.new-submit {
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.show-header {
+  margin-bottom: 20px;
+}
+
+.show-header h2 {
+  font-size: 24px;
+}
+
+.show-content {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.show-footer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.show-footer form {
+  margin-left: 20px;
+}
+
+.show-footer button {
+  padding: 10px 20px;
+  background-color: #f44336
+}
