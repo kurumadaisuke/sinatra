@@ -2,19 +2,22 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require 'sinatra/json'
 require 'cgi'
+require 'pg'
 
 set :environment, :production
 
-json_file = 'private/memos.json'
+def read_memos_db
+  PG::Connection.new(dbname: 'postgres')
+end
 
 get '/' do
   redirect '/memos'
 end
 
 get '/memos' do
-  @memos = JSON.parse(File.read(json_file))
+  conn = read_memos_db
+  @memos = conn.exec('SELECT * FROM memos')
   erb :index
 end
 
@@ -23,51 +26,36 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  memos = JSON.parse(File.read(json_file))
+  conn = read_memos_db
   title = params[:title]
   content = params[:content]
-  id = (memos.keys.max.to_i + 1).to_s
-  new_memo = { 'title' => title, 'content' => content }
-  memos[id] = new_memo
-
-  File.open(json_file, 'w') do |file|
-    JSON.dump(memos, file)
-  end
-
+  id = conn.exec("SELECT MAX(id) FROM memos")[0]["max"].to_i + 1
+  conn.exec("INSERT INTO memos VALUES ('#{id}', '#{title}', '#{content}')")
   redirect '/memos'
 end
 
 get '/memos/:id' do
-  @memo = JSON.parse(File.read(json_file))[params[:id]]
+  conn = read_memos_db
+  @memo = conn.exec("SELECT * FROM memos WHERE id = #{params[:id]}")[0]
   erb :show
 end
 
 delete '/memos/:id' do
-  memos = JSON.parse(File.read(json_file))
-  memos.delete(params[:id])
-
-  File.open(json_file, 'w') do |file|
-    JSON.dump(memos, file)
-  end
-
+  conn = read_memos_db
+  conn.exec("DELETE FROM memos WHERE id = #{params[:id]}")
   redirect '/memos'
 end
 
 get '/memos/:id/edit' do
-  @memo = JSON.parse(File.read(json_file))[params[:id]]
+  conn = read_memos_db
+  @memo = conn.exec("SELECT * FROM memos WHERE id = #{params[:id]}")[0]
   erb :edit
 end
 
 patch '/memos/:id' do
-  memos = JSON.parse(File.read(json_file))
+  conn = read_memos_db
   edit_title = params[:title]
   edit_content = params[:content]
-
-  memos[params[:id]] = { 'title' => edit_title, 'content' => edit_content }
-
-  File.open(json_file, 'w') do |file|
-    JSON.dump(memos, file)
-  end
-
+  conn.exec("UPDATE memos SET title = '#{edit_title}', content = '#{edit_content}' WHERE id = #{params[:id]}")
   redirect "/memos/#{params[:id]}"
 end
