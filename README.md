@@ -1,7 +1,6 @@
 # sinatra
 ## メモアプリ導入手順
 
-
 1)メモアプリ導入ディレクトリの作成,移動
 ```
 base ❯ mkdir memoapp
