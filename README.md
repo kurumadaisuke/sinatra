@@ -28,4 +28,4 @@ base ❯ bundle exec ruby memoapp.rb
 ```
 
 ブラウザにてメモアプリの起動を確認
-http://localhost:4567/
+http://localhost:4567/git 
