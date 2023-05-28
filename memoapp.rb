@@ -7,30 +7,27 @@ require 'pg'
 
 set :environment, :production
 
-# メモに対する各機能に対するSQL文
-class Memo
-  def initialize
-    @@conn = PG::Connection.new(dbname: 'postgres')
-  end
+class DataAccess
+  @conn = PG::Connection.new(dbname: 'postgres')
 
   def self.lists
-    @@conn.exec('SELECT * FROM memos ORDER BY id DESC')
+    @conn.exec('SELECT * FROM memos ORDER BY id DESC')
   end
 
   def self.create(title, content)
-    @@conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2)', [title, content])
+    @conn.exec_params('INSERT INTO memos(title, content) VALUES ($1, $2)', [title, content])
   end
 
   def self.specify(id)
-    @@conn.exec_params('SELECT * FROM memos WHERE id = $1', [id])[0]
+    @conn.exec_params('SELECT * FROM memos WHERE id = $1', [id])[0]
   end
 
   def self.delete(id)
-    @@conn.exec_params('DELETE FROM memos WHERE id = $1', [id])
+    @conn.exec_params('DELETE FROM memos WHERE id = $1', [id])
   end
 
   def self.edit(title, content, id)
-    @@conn.exec_params('UPDATE memos SET title = $1, content = $2 WHERE id = $3', [title, content, id])
+    @conn.exec_params('UPDATE memos SET title = $1, content = $2 WHERE id = $3', [title, content, id])
   end
 end
 
@@ -39,8 +36,8 @@ get '/' do
 end
 
 get '/memos' do
-  Memo.new
-  @memos = Memo.lists
+  DataAccess.new
+  @memos = DataAccess.lists
   erb :index
 end
 
@@ -49,26 +46,26 @@ get '/memos/new' do
 end
 
 post '/memos' do
-  Memo.create(params[:title], params[:content])
+  DataAccess.create(params[:title], params[:content])
   redirect '/memos'
 end
 
 get '/memos/:id' do
-  @memo = Memo.specify(params[:id])
+  @memo = DataAccess.specify(params[:id])
   erb :show
 end
 
 delete '/memos/:id' do
-  Memo.delete(params[:id])
+  DataAccess.delete(params[:id])
   redirect '/memos'
 end
 
 get '/memos/:id/edit' do
-  @memo = Memo.specify(params[:id])
+  @memo = DataAccess.specify(params[:id])
   erb :edit
 end
 
 patch '/memos/:id' do
-  Memo.edit(params[:title], params[:content], params[:id])
+  DataAccess.edit(params[:title], params[:content], params[:id])
   redirect "/memos/#{params[:id]}"
 end
