@@ -36,7 +36,6 @@ get '/' do
 end
 
 get '/memos' do
-  DataAccess.new
   @memos = DataAccess.lists
   erb :index
 end
